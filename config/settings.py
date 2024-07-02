@@ -15,7 +15,6 @@ from pathlib import Path
 # Создайте пути внутри проекта следующим образом: BASE_DIR/'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Настройки быстрого старта разработки - непригодны для производства
 # См. https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/.
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Определение приложения
 
 INSTALLED_APPS = [
@@ -37,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'catalog',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +68,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # База данных
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
@@ -78,7 +76,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Проверка пароля
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -98,7 +95,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Интернационализация
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -110,7 +106,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Статические файлы (CSS, JavaScript, изображения)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -118,5 +113,7 @@ STATIC_URL = 'static/'
 
 # Тип поля первичного ключа по умолчанию
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+STATICFILES_DIRS = (BASE_DIR / 'static',)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
