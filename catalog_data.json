@@ -1,0 +1,96 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "телефоны",
+      "description": "Мобильные устройства различных типов и  характеристик"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Телевизоры",
+      "description": "Телевизоры разных диагонали, форматов, размеров"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Samsung S6",
+      "description": "Samsung S6, оперативной памяти 16Гб, встроенной памяти 512 Гб.",
+      "picture": "",
+      "category": 1,
+      "price": "15000.00",
+      "created_at": "2024-07-11T06:30:18.119Z",
+      "updated_at": "2024-07-11T06:30:18.119Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Xiaomi Redmi 5",
+      "description": "Xiaomi Redmi 5 оперативной памяти 8 Гб. встроенной памяти 64 Гб",
+      "picture": "",
+      "category": 1,
+      "price": "10000.00",
+      "created_at": "2024-07-11T06:31:40.626Z",
+      "updated_at": "2024-07-11T06:31:40.626Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Irbis",
+      "description": "Irbis. Диагональ 34 дюйма, без смарт ТВ.",
+      "picture": "",
+      "category": 2,
+      "price": "5000.00",
+      "created_at": "2024-07-11T06:32:31.347Z",
+      "updated_at": "2024-07-11T06:32:31.347Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Samsung",
+      "description": "Телевизор Samsung  диагональ 55 дюймов",
+      "picture": "",
+      "category": 2,
+      "price": "65000.00",
+      "created_at": "2024-07-11T06:33:17.230Z",
+      "updated_at": "2024-07-11T06:33:17.230Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "Telefunkin",
+      "description": null,
+      "picture": "",
+      "category": 1,
+      "price": "12500.00",
+      "created_at": "2024-07-11T07:44:23.962Z",
+      "updated_at": "2024-07-11T07:44:23.962Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "name": "BQ",
+      "description": null,
+      "picture": "",
+      "category": 1,
+      "price": "111000.00",
+      "created_at": "2024-07-11T13:29:39.347Z",
+      "updated_at": "2024-07-11T13:29:39.347Z"
+    }
+  }
+]
