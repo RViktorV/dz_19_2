@@ -1,28 +1,35 @@
-import os
 import json
+
 from django.core.management.base import BaseCommand
 from catalog.models import Category, Product
 
+
 class Command(BaseCommand):
-    help = 'Load data from JSON file into the database, clearing existing data first.'
+
+    @staticmethod
+    def json_read_categories(file_path='catalog/catalog_data.json'):
+        with open(file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            return [item for item in data if item['model'] == 'catalog.category']
+
+    @staticmethod
+    def json_read_products(file_path='catalog/catalog_data.json'):
+        with open(file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            return [item for item in data if item['model'] == 'catalog.product']
 
     def handle(self, *args, **kwargs):
-        # Загрузка данных из JSON-файла
-        with open('catalog/catalog_data.json', 'r', encoding='utf-8') as file:
-            data = json.load(file)
-
-        # Удаление всех продуктов
+        # Удалите все продукты
         Product.objects.all().delete()
-        self.stdout.write(self.style.WARNING('All products have been deleted.'))
-
-        # Удаление всех категорий
+        # Удалите все категории
         Category.objects.all().delete()
-        self.stdout.write(self.style.WARNING('All categories have been deleted.'))
 
-        # Создание категорий
-        categories_data = [item for item in data if item['model'] == 'catalog.category']
+        # Создайте списки для хранения объектов
         categories_for_create = []
-        for item in categories_data:
+        products_for_create = []
+
+        # Обходим все значения категорий из фикстуры для получения информации об одном объекте
+        for item in self.json_read_categories():
             fields = item['fields']
             category = Category(
                 id=item['pk'],
@@ -31,19 +38,17 @@ class Command(BaseCommand):
             )
             categories_for_create.append(category)
 
+        # Создаем объекты в базе с помощью метода bulk_create()
         Category.objects.bulk_create(categories_for_create)
-        self.stdout.write(self.style.SUCCESS('Categories have been created.'))
 
-        # Создание продуктов
-        products_data = [item for item in data if item['model'] == 'catalog.product']
-        products_for_create = []
-        for item in products_data:
+        # Обходим все значения продуктов из фикстуры для получения информации об одном объекте
+        for item in self.json_read_products():
             fields = item['fields']
             product = Product(
                 id=item['pk'],
                 name=fields['name'],
                 description=fields.get('description', ''),
-                image=fields.get('image', ''),
+                picture=fields.get('image', ''),
                 category=Category.objects.get(pk=fields['category']),
                 price=fields['price'],
                 created_at=fields['created_at'],
@@ -51,7 +56,8 @@ class Command(BaseCommand):
             )
             products_for_create.append(product)
 
+        # Создаем объекты в базе с помощью метода bulk_create()
         Product.objects.bulk_create(products_for_create)
-        self.stdout.write(self.style.SUCCESS('Products have been created.'))
 
-        self.stdout.write(self.style.SUCCESS('Data has been successfully loaded into the database.'))
+        self.stdout.write(self.style.SUCCESS('Данные загружены'))
+
