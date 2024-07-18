@@ -10,6 +10,7 @@ Django = "^5.0.6"
 psycopg2-binary = "^2.9.9"  # dz_20.1
 pillow = "^10.4.0"  # dz_20.1
 ipython = "^8.26.0"
+Tree = "^0.2.4"
 
 
 [tool.poetry.dev-dependencies]
