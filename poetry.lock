@@ -28,6 +28,17 @@ astroid = ["astroid (>=1,<2)", "astroid (>=2,<4)"]
 test = ["pytest", "astroid (>=1,<2)", "astroid (>=2,<4)"]
 
 [[package]]
+name = "click"
+version = "8.1.7"
+description = "Composable command line interface toolkit"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 description = "Cross-platform colored terminal text."
@@ -269,6 +280,14 @@ pure-eval = "*"
 tests = ["pytest", "typeguard", "pygments", "littleutils", "cython"]
 
 [[package]]
+name = "svgwrite"
+version = "1.4.3"
+description = "A Python library to create SVG drawings."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "traitlets"
 version = "5.14.3"
 description = "Traitlets Python configuration system"
@@ -279,6 +298,19 @@ python-versions = ">=3.8"
 [package.extras]
 docs = ["myst-parser", "pydata-sphinx-theme", "sphinx"]
 test = ["argcomplete (>=3.0.3)", "mypy (>=1.7.0)", "pre-commit", "pytest-mock", "pytest-mypy-testing", "pytest (>=7.0,<8.2)"]
+
+[[package]]
+name = "tree"
+version = "0.2.4"
+description = "A package for creating and drawing trees"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+click = "*"
+Pillow = "*"
+svgwrite = "*"
 
 [[package]]
 name = "typing-extensions"
@@ -307,11 +339,12 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "d944983b2bbb8a124211860a4c0de663ddfbef82b04aaa2adb06a657c34e9531"
+content-hash = "9aeb5e8430cae7179bdae60cea2cd13efa7d2905e23e49286c8034e6fcc6be0c"
 
 [metadata.files]
 asgiref = []
 asttokens = []
+click = []
 colorama = []
 decorator = []
 django = []
@@ -331,7 +364,9 @@ pygments = []
 six = []
 sqlparse = []
 stack-data = []
+svgwrite = []
 traitlets = []
+tree = []
 typing-extensions = []
 tzdata = []
 wcwidth = []
