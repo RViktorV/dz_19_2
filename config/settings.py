@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 Полный список настроек и их значений см.
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
 from pathlib import Path
 
 # Создайте пути внутри проекта следующим образом: BASE_DIR/'subdir'.
@@ -35,7 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'catalog',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -72,12 +73,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', # dz_20.1
-        'NAME': 'dz_20_1', # dz_20.1
-        'USER': 'postgres', # dz_20.1
-        'PASSWORD': '1q2w3e', # dz_20.1
-        'HOST': '127.0.0.1', # dz_20.1
-        'PORT': '5432', # dz_20.1
+        'ENGINE': 'django.db.backends.postgresql',  # dz_20.1
+        'NAME': 'dz_20_1',  # dz_20.1
+        'USER': 'postgres',  # dz_20.1
+        'PASSWORD': '1q2w3e',  # dz_20.1
+        'HOST': '127.0.0.1',  # dz_20.1
+        'PORT': '5432',  # dz_20.1
     }
 }
 # Проверка пароля
@@ -122,5 +123,5 @@ STATICFILES_DIRS = (BASE_DIR / 'static',)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/' # dz_20.1
-MEDIA_ROOT = BASE_DIR / 'media' # dz_20.1
+MEDIA_URL = '/media/'  # dz_20.1
+MEDIA_ROOT = BASE_DIR / 'media'  # dz_20.1
