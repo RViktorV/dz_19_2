@@ -1,0 +1,27 @@
+{% extends "catalog/home.html" %}
+
+{% block product %}
+<body>
+<div class="container mt-5 d-flex flex-column align-items-center">
+    <h1 class="text-center">Посты (активные)</h1>
+
+    <div class="d-flex justify-content-center mb-3">
+        <a href="{% url 'blog:blog_create' %}" class="btn btn-success mr-2">Создать новый пост</a>
+        <a href="{% url 'blog:blog_list_all' %}" class="btn btn-secondary">Показать все посты</a>
+    </div>
+
+    <ul class="list-group w-50">
+        {% for blog in object_list %}
+        <li class="list-group-item">
+            <a href="{% url 'blog:blog_detail' blog.pk %}">{{ blog.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+
+{% endblock %}
+
+
+
+
