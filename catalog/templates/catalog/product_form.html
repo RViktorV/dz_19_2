@@ -9,6 +9,6 @@
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Сохранить</button>
       </form>
-      <a class="btn btn-secondary mt-2" href="{% url 'home' %}">Назад к списку продуктов</a>
+      <a class="btn btn-secondary mt-2" href="{% url 'catalog:product_list' %}">Назад к списку продуктов</a>
   </div>
 {% endblock %}
