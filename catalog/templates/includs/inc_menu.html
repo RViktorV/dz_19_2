@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,9 +12,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/contacts/">Contacts</a>
                 </li>
-                <!-- Добавляем кнопку для перехода на страницу блога -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'blog:blog_list' %}">Blog</a>
+                </li>
+                <!-- Добавляем кнопку для перехода на страницу создания продукта -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'catalog:product_create' %}">Create Product</a>
                 </li>
             </ul>
         </div>
