@@ -1,7 +1,7 @@
 # 22.1 - Формы в Django вместо fields
 
 from django import forms
-from .models import Product
+from .models import Product, Version
 
 PROHIBITED_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
@@ -23,3 +23,19 @@ class ProductForm(forms.ModelForm):
             if word in description.lower():
                 raise forms.ValidationError(f"Описание продукта не должно содержать запрещенное слово: {word}")
         return description
+
+    class VersionForm(forms.ModelForm):
+        class Meta:
+            model = Version
+            fields = ['product', 'version_number', 'version_name', 'is_current']
+
+        def clean(self):
+            cleaned_data = super().clean()
+            is_current = cleaned_data.get('is_current')
+            product = cleaned_data.get('product')
+
+            if is_current and product:
+                if Version.objects.filter(product=product, is_current=True).exclude(id=self.instance.id).exists():
+                    raise forms.ValidationError('Для каждого продукта может быть только одна активная версия..')
+
+            return cleaned_data
