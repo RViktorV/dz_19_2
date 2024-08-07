@@ -45,7 +45,7 @@ class Command(BaseCommand):
         for item in self.json_read_products():
             fields = item['fields']
             product = Product(
-                id=item['pk'],
+                # id=item['pk'],
                 name=fields['name'],
                 description=fields.get('description', ''),
                 picture=fields.get('image', ''),

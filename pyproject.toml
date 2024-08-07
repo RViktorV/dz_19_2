@@ -13,6 +13,8 @@ ipython = "^8.26.0"
 Tree = "^0.2.4"
 pytils = "^0.4.1"
 
+tree = "^0.2.4"
+psycopg2 = "^2.9.9"
 
 [tool.poetry.dev-dependencies]
 
