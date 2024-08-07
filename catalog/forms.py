@@ -24,18 +24,21 @@ class ProductForm(forms.ModelForm):
                 raise forms.ValidationError(f"Описание продукта не должно содержать запрещенное слово: {word}")
         return description
 
-    class VersionForm(forms.ModelForm):
-        class Meta:
-            model = Version
-            fields = ['product', 'version_number', 'version_name', 'is_current']
+class VersionForm(forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = ['version_number', 'version_name', 'is_current']
 
-        def clean(self):
-            cleaned_data = super().clean()
-            is_current = cleaned_data.get('is_current')
-            product = cleaned_data.get('product')
+    def clean(self):
+        cleaned_data = super().clean()
+        is_current = cleaned_data.get('is_current')
+        # product = cleaned_data.get('product')
+        product = self.instance.product if self.instance else None
 
-            if is_current and product:
-                if Version.objects.filter(product=product, is_current=True).exclude(id=self.instance.id).exists():
-                    raise forms.ValidationError('Для каждого продукта может быть только одна активная версия..')
+        if is_current and product:
+            if Version.objects.filter(product=product, is_current=True).exclude(id=self.instance.id).exists():
+                raise forms.ValidationError('Для каждого продукта может быть только одна активная версия..')
 
-            return cleaned_data
+        return cleaned_data
+
+
