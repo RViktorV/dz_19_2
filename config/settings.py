@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 Полный список настроек и их значений см.
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
 from pathlib import Path
 
 # Создайте пути внутри проекта следующим образом: BASE_DIR/'subdir'.
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
