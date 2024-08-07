@@ -6,7 +6,7 @@
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row row row g-3">
                 <div class="col">
                     <div class="card shadow-sm">
                         <img src="{{ object.picture | media_filter }}">
@@ -19,6 +19,7 @@
                                     <a class="btn btn-primary" href="{% url 'catalog:home'%}" role="button"> К
                                         каталогу</a>
                                     <a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk%}" role="button"> Удалить продукт</a>
+                                    <a class="btn btn-warning" href="{% url 'catalog:product_edit' object.pk%}" role="button"> Редактировать</a>
                                 </div>
                                 <small class="text-body-secondary">9 мин</small>
                             </div>
