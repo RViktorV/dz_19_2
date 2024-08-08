@@ -5,6 +5,7 @@ from .models import Product, Version
 
 PROHIBITED_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -21,7 +22,7 @@ class ProductForm(forms.ModelForm):
         description = self.cleaned_data.get('description')
         for word in PROHIBITED_WORDS:
             if word in description.lower():
-                raise forms.ValidationError(f"Описание продукта не должно содержать запрещенное слово: {word}") # от тут работает?
+                raise forms.ValidationError(f"Описание продукта не должно содержать запрещенное слово: {word}")
         return description
 
 
@@ -47,13 +48,4 @@ class VersionForm(forms.ModelForm):
                 print("В райзе у вот же работает все, больше одного ставишь, принтует. Но исключения нет")
                 raise forms.ValidationError('Для каждого продукта может быть только одна активная версия.')
 
-        # Получаем текущие версии конкретного продута.
-        # И если среди них есть ТЕКУЩИЕ, вызываем исключение
-        # current_versions = Version.objects.filter(product=self.cleaned_data["product"], is_current=True)
-        # if cleaned_data and current_versions:
-        #     raise forms.ValidationError(
-        #         f"Текущая версия может быть только одна. На данный момент установлена текущей: версия {current_versions[0]}")
-
         return cleaned_data
-
-

@@ -52,4 +52,4 @@ class Version(models.Model):
         ordering = ['product']
 
     def __str__(self):
-        return f"{self.product.name} - {self.version_name} ({self.version_number})"
+        return f" {self.version_name} ({self.version_number})"
