@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-# from django.utils.text import slugify
-# from pytils import slugify
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
 
+from blog.forms import BlogForm
 from blog.models import Blog
 
 
@@ -31,7 +30,7 @@ class BlogDetailView(DetailView):
 
 class BlogCreateView(CreateView):
     model = Blog
-    fields = ['title', 'content', 'preview_image', 'is_published',]
+    form_class = BlogForm  # 22.1 - Формы в Django вместо fields
     success_url = reverse_lazy('blog:blog_list')
 
     def form_valid(self, form):
@@ -45,9 +44,8 @@ class BlogCreateView(CreateView):
 
 class BlogUpdateView(UpdateView):
     model = Blog
-    fields = ['title', 'content', 'preview_image', 'is_published']
-
-    # success_url = reverse_lazy('blog:blog_list')
+    form_class = BlogForm  # 22.1 - формы в Django вместо fields
+    success_url = reverse_lazy('blog:blog_list')
 
     def form_valid(self, form):
         if form.is_valid():

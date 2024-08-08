@@ -1,9 +1,9 @@
 {% extends "catalog/home.html" %}
 
-{% block product %}
+{% block content %}
 <body>
 <div class="container mt-5 d-flex flex-column align-items-center">
-    <h1 class="text-center">Посты (активные)</h1>
+    <h1 class="text-center">Опубликованные посты</h1>
 
     <div class="d-flex justify-content-center mb-3">
         <a href="{% url 'blog:blog_create' %}" class="btn btn-success mr-2">Создать новый пост</a>

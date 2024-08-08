@@ -1,0 +1,38 @@
+{% extends 'catalog/home.html' %}
+
+{% block content %}
+<div class="col-12">
+    <form method="post" enctype="multipart/form-data">
+        <div class="container mt-4">
+            <h2>{% if object %}Редактировать продукт{% else %}Создать продукт{% endif %}</h2>
+
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <h3>Добавить/Редактировать версию</h3>
+<!--            {{ version_form.as_p }}-->
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Версия продукта
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        {{ formset.management_form }}
+                        {% for form in formset.forms %}
+                        {{ form.as_p }}
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+
+            <a class="btn btn-secondary mt-2" href="{% url 'catalog:home' %}">Назад к списку продуктов</a>
+
+        </div>
+
+    </form>
+</div>
+{% endblock %}
