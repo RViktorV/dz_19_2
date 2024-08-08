@@ -37,15 +37,12 @@ class VersionForm(forms.ModelForm):
             field.widget.attrs.update({"class": "form-control", })
         self.fields["is_current"].widget.attrs["class"] = "form-check-input"
 
-    def clean_is_current(self):
-        # cleaned_data = super().clean() # Это чее? )))
-        cleaned_data = self.cleaned_data.get('is_current')
-        # is_current = cleaned_data.get('is_current')
-        product = self.instance.product if self.instance else None
-
-        if cleaned_data and product:
-            if Version.objects.filter(product=product, is_current=True).exclude(id=self.instance.id).exists():
-                print("В райзе у вот же работает все, больше одного ставишь, принтует. Но исключения нет")
-                raise forms.ValidationError('Для каждого продукта может быть только одна активная версия.')
-
-        return cleaned_data
+    # def clean_is_current(self):
+    #     cleaned_data = self.cleaned_data.get('is_current')
+    #     product = self.instance.product if self.instance else None
+    #
+    #     if cleaned_data and product:
+    #         if Version.objects.filter(product=product, is_current=True).exclude(id=self.instance.id).exists():
+    #             raise forms.ValidationError('Для каждого продукта может быть только одна активная версия.')
+    #
+    #     return cleaned_data
