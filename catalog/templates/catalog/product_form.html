@@ -1,28 +1,33 @@
 {% extends 'catalog/home.html' %}
 
 {% block content %}
-<div class="col-12">
+<div class="container mt-4">
+    <h2>{% if object %}Редактировать продукт{% else %}Создать продукт{% endif %}</h2>
+
     <form method="post" enctype="multipart/form-data">
-        <div class="container mt-4">
-            <h2>{% if object %}Редактировать продукт{% else %}Создать продукт{% endif %}</h2>
-
-            {% csrf_token %}
-            {{ form.as_p }}
-
-            <h3>Добавить/Редактировать версию</h3>
-            {% if formset.non_form_errors %}
-            <div class="alert alert-danger">
-                {{ formset.non_form_errors }}
+        {% csrf_token %}
+        <div class="row">
+            <!-- Левая колонка: форма редактирования продукта -->
+            <div class="col-md-6">
+                {{ form.as_p }}
             </div>
-            {% endif %}
-            <div class="col-6">
+
+            <!-- Правая колонка: форма редактирования версий продукта -->
+            <div class="col-md-6">
+                <h3>Добавить/Редактировать версию</h3>
+
+                {% if formset.non_form_errors %}
+                <div class="alert alert-danger">
+                    {{ formset.non_form_errors }}
+                </div>
+                {% endif %}
+
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
                             Версия продукта
                         </h3>
                     </div>
-
                     <div class="card-body">
                         {{ formset.management_form }}
                         {% for form in formset.forms %}
@@ -32,12 +37,12 @@
                     <div class="card-footer"></div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-
-            <a class="btn btn-secondary mt-2" href="{% url 'catalog:home' %}">Назад к списку продуктов</a>
-
         </div>
 
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a class="btn btn-secondary" href="{% url 'catalog:home' %}">Назад к списку продуктов</a>
+        </div>
     </form>
 </div>
 {% endblock %}
