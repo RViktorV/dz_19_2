@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, forms
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
@@ -19,7 +19,7 @@ class HomeListView(ListView):
 
         active_versions = {}
         for product in products:
-            current_versions = product.versions.filter(is_current=True)  # очень не оптимальный запрос
+            current_versions = product.versions.filter(is_current=True)
             active_versions[product.id] = current_versions.first()
 
         context['active_versions'] = active_versions
@@ -57,11 +57,21 @@ class ProductUpdateView(UpdateView):
     def form_valid(self, form):
         context_data = self.get_context_data()
         formset = context_data.get('formset')
-        # self.object = form.save()
         if formset.is_valid():
-            # formset.instance = self.object
+            active_versions_count = sum(1 for form in formset if form.cleaned_data.get('is_current'))
+            if active_versions_count > 1:
+                formset.non_form_errors = ['Вы можете выбрать только одну активную версию для продукта.']
+                return self.form_invalid(form)  # Возвращаем ошибку формы
             formset.save()
-        return super().form_valid(form)
+            return super().form_valid(form)
+
+        def form_invalid(self, form):
+            context_data = self.get_context_data()
+            formset = context_data.get('formset')
+            if formset.errors:
+                return self.render_to_response(self.get_context_data(form=form))
+            else:
+                return super().form_invalid(form)
 
 
 class ProductDeleteView(DeleteView):
