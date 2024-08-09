@@ -65,16 +65,6 @@ class ProductUpdateView(UpdateView):
             formset.save()
         return super().form_valid(form)
 
-    def form_invalid(self, form):
-        context_data = self.get_context_data(form=form)
-        # formset = context_data.get('formset')
-        # if formset.errors:
-        #     return self.render_to_response(self.get_context_data(form=form))
-        # else:
-        #     return super().form_invalid(form)
-        return self.render_to_response(context_data)
-
-
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
