@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.forms import inlineformset_factory, forms
+from django.forms import inlineformset_factory, forms, BaseInlineFormSet
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
@@ -39,6 +39,7 @@ class ProductCreateView(CreateView):
     template_name = 'catalog/product_form.html'
 
 
+
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
@@ -53,6 +54,7 @@ class ProductUpdateView(UpdateView):
         else:
             context_data['formset'] = VersionFormset(instance=self.object)
         return context_data
+
 
     def form_valid(self, form):
         context_data = self.get_context_data()

@@ -5,16 +5,16 @@ description = ""
 authors = ["vitek <rgavih@yandex.ru>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-Django = "^5.0.6"
-psycopg2-binary = "^2.9.9"  # dz_20.1
+python = "^3.11"
+django = "^5.0.6"
+psycopg2 = { version = "2.9.9", allow-prereleases = true, extras = ["--no-binary psycopg2"] }
 pillow = "^10.4.0"  # dz_20.1
 ipython = "^8.26.0"
 Tree = "^0.2.4"
 pytils = "^0.4.1"
 
 tree = "^0.2.4"
-psycopg2 = "^2.9.9"
+
 
 [tool.poetry.dev-dependencies]
 
