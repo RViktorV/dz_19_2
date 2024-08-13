@@ -1,0 +1,32 @@
+{% extends 'catalog/home.html' %}
+
+{% load static %}  <!-- Загрузка тега static -->
+
+{% block content %}
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">  <!-- Подключение стилей, если они есть -->
+    </head>
+    <body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_username">Email:</label>
+                <input type="email" name="username" id="id_username" required>
+            </div>
+            <div>
+                <label for="id_password">Password:</label>
+                <input type="password" name="password" id="id_password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        {#        <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>#}
+    </div>
+    </body>
+    </html>
+{% endblock %}

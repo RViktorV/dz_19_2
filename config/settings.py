@@ -1,14 +1,3 @@
-"""
-Настройки Django для проекта конфигурации.
-
-Создано «django-admin startproject» с использованием Django 5.0.6.
-
-Дополнительную информацию об этом файле см.
-https://docs.djangoproject.com/en/5.0/topics/settings/
-
-Полный список настроек и их значений см.
-https://docs.djangoproject.com/en/5.0/ref/settings/
-"""
 import os
 from pathlib import Path
 
@@ -38,6 +27,7 @@ INSTALLED_APPS = [
 
     'catalog',
     'blog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +116,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'  # dz_20.1
 MEDIA_ROOT = BASE_DIR / 'media'  # dz_20.1
+
+AUTH_USER_MODEL = 'users.Users'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
