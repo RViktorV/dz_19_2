@@ -1,14 +1,3 @@
-"""
-Настройки Django для проекта конфигурации.
-
-Создано «django-admin startproject» с использованием Django 5.0.6.
-
-Дополнительную информацию об этом файле см.
-https://docs.djangoproject.com/en/5.0/topics/settings/
-
-Полный список настроек и их значений см.
-https://docs.djangoproject.com/en/5.0/ref/settings/
-"""
 import os
 from pathlib import Path
 
@@ -38,6 +27,7 @@ INSTALLED_APPS = [
 
     'catalog',
     'blog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -74,12 +64,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # dz_20.1
-        'NAME': 'dz_20_1',  # dz_20.1
-        'USER': 'postgres',  # dz_20.1
-        'PASSWORD': '1q2w3e',  # dz_20.1
-        'HOST': '127.0.0.1',  # dz_20.1
-        'PORT': '5432',  # dz_20.1
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dz_22_2',
+        'USER': 'postgres',
+        'PASSWORD': '1q2w3e',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 # Проверка пароля
@@ -126,3 +116,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'  # dz_20.1
 MEDIA_ROOT = BASE_DIR / 'media'  # dz_20.1
+
+AUTH_USER_MODEL = 'users.Users'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "vanya1928ivanov@yandex.ru"
+EMAIL_HOST_PASSWORD = "jncywffoxzdmdsho"
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -1,7 +1,6 @@
 {% extends "catalog/home.html" %}
 
 {% block content %}
-<body>
     <div class="container mt-5">
         <h1>Вы уверены, что хотите удалить "{{ blog.title }}"?</h1>
         <form method="post">
@@ -10,5 +9,11 @@
         </form>
         <a href="{% url 'blog:blog_list' %}" class="btn btn-secondary mt-3">Нет, отменить</a>
     </div>
-</body>
+    </body>
 {% endblock %}
+
+
+
+    
+
+

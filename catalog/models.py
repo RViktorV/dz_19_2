@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import Users
+
 # dz_20.1 все модели созданы в дз 20.1 до 34 строки
 
 NULLABLE = {'blank': True, 'null': True}
@@ -29,6 +31,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена за покупку')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
+
+    owner = models.ForeignKey(Users, verbose_name='Собственник товара', **NULLABLE, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Продукт'

@@ -17,8 +17,27 @@
                 </li>
                 <!-- Добавляем кнопку для перехода на страницу создания продукта -->
                 <li class="nav-item">
+                    {% if user.is_authenticated %}
                     <a class="nav-link" href="{% url 'catalog:product_create' %}">Создать продукт</a>
+                    {% endif %}
                 </li>
+
+                {% if user.is_authenticated %}
+                    <!-- Кнопка "Редактировать профиль" для аутентифицированных пользователей -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:profile' %}">Редактировать профиль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:login' %}">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:register' %}">Регистрация</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
