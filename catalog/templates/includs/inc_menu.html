@@ -17,7 +17,9 @@
                 </li>
                 <!-- Добавляем кнопку для перехода на страницу создания продукта -->
                 <li class="nav-item">
+                    {% if user.is_authenticated %}
                     <a class="nav-link" href="{% url 'catalog:product_create' %}">Создать продукт</a>
+                    {% endif %}
                 </li>
 
                 {% if user.is_authenticated %}

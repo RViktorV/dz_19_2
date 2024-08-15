@@ -64,12 +64,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # dz_20.1
-        'NAME': 'dz_20_1',  # dz_20.1
-        'USER': 'postgres',  # dz_20.1
-        'PASSWORD': '1q2w3e',  # dz_20.1
-        'HOST': '127.0.0.1',  # dz_20.1
-        'PORT': '5432',  # dz_20.1
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dz_22_2',
+        'USER': 'postgres',
+        'PASSWORD': '1q2w3e',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 # Проверка пароля
