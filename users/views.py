@@ -83,3 +83,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'profile_edit.html'
     success_url = reverse_lazy('users:login')
+
+
+

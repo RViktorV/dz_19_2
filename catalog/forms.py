@@ -1,7 +1,4 @@
-# 22.1 - Формы в Django вместо fields
-from django.forms import inlineformset_factory
 from django import forms
-from django.forms.models import BaseInlineFormSet
 from .models import Product, Version
 
 PROHIBITED_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
@@ -34,5 +31,3 @@ class VersionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-
