@@ -8,22 +8,14 @@ class UserRegisterForm(UserCreationForm):
         model = Users
         fields = ['email', 'password1', 'password2', 'phone_number']
 
-        # def __init__(self, *args, **kwargs):
-        #     super().__init__(*args, **kwargs)
-        #     for field_name, field in self.fields.items():
-        #         field.widget.attrs['class'] = 'form-control'
+class PasswordResetForm(forms.Form):
+    email = forms.EmailField(label="Email", max_length=254)
 
 
-
-# class UsersForm(forms.ModelForm):
-#     class Meta:
-#         model = Users
-#         fields = ['phone_number', 'country']
-#
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     for field_name, field in self.fields.items():
-    #         field.widget.attrs['class'] = 'form-control'
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = Users
+        fields = ['first_name', 'last_name', 'email']
 
 
 

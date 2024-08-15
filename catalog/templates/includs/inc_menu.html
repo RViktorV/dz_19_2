@@ -23,15 +23,19 @@
                 </li>
 
                 {% if user.is_authenticated %}
+                    <!-- Кнопка "Редактировать профиль" для аутентифицированных пользователей -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:profile' %}">Редактировать профиль</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
                     </li>
-                    {% else %}
+                {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:login' %}">Вход</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:register' %}">Регистрация</a>
+                        <a class="nav-link" href="{% url 'users:profile' %}">Регистрация</a>
                     </li>
                 {% endif %}
             </ul>

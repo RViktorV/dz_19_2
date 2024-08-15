@@ -1,0 +1,17 @@
+{% extends 'catalog/home.html' %}
+
+{% block content %}
+<h2>Редактировать профиль</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить изменения</button>
+</form>
+
+<h2>Сменить пароль</h2>
+<form method="post" action="{% url 'users:password_change' %}">
+    {% csrf_token %}
+    {{ password_change_form.as_p }}
+    <button type="submit">Сменить пароль</button>
+</form>
+{% endblock %}
