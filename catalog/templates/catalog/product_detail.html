@@ -22,9 +22,14 @@
                                     <div class="btn-group">
                                         <a class="btn btn-primary" href="{% url 'catalog:home' %}" role="button">К
                                             каталогу</a>
-                                        {% if perms.catalog.can_is_published_product and perms.catalog.can_description_product and perms.catalog.can_category_product or user == product.owner %}
+                                        {% if perms.catalog.can_is_published_product and perms.catalog.can_description_product and perms.catalog.can_category_product %}
+                                            <a class="btn btn-warning"
+                                               href="{% url 'catalog:product_edit' product.pk %}" role="button">Редактировать</a>
+                                        {% endif %}
+                                        {% if user == product.owner %}
                                             <a class="btn btn-danger"
-                                               href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить продукт</a>
+                                               href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить
+                                                продукт</a>
                                             <a class="btn btn-warning"
                                                href="{% url 'catalog:product_edit' product.pk %}" role="button">Редактировать</a>
                                             </div>
