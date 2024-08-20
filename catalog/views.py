@@ -1,11 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.forms import inlineformset_factory, forms, BaseInlineFormSet
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version
 
 
@@ -39,7 +40,6 @@ class ProductCreateView(CreateView, LoginRequiredMixin):
     success_url = reverse_lazy('catalog:home')
     template_name = 'catalog/product_form.html'
 
-
     def form_valid(self, form):
         product = form.save()
         user = self.request.user
@@ -48,8 +48,7 @@ class ProductCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
@@ -64,7 +63,6 @@ class ProductUpdateView(UpdateView):
             context_data['formset'] = VersionFormset(instance=self.object)
         return context_data
 
-
     def form_valid(self, form):
         context_data = self.get_context_data()
         formset = context_data.get('formset')
@@ -75,6 +73,19 @@ class ProductUpdateView(UpdateView):
                 return self.form_invalid(form)  # Возвращаем ошибку формы
             formset.save()
         return super().form_valid(form)
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductForm
+        if user.has_perms([
+            "catalog.can_is_published_product",
+            "catalog.can_description_product",
+            "catalog.can_category_product",
+        ]):
+            return ProductModeratorForm
+        raise PermissionDenied
+
 
 class ProductDeleteView(DeleteView):
     model = Product

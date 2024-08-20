@@ -2,28 +2,35 @@
 {% load my_tags %}
 {% block content %}
 
-<div class="container">
+    <div class="container">
 
-    <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-            <div class="row row row row-cols-2 row-cols-sm-2 row-cols-md-2 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="{{ product.picture | media_filter }}">
-                        <div class="card-body">
-                            <p class="card-text">{{ product.name }} - Категория товара: {{ product.category }}</p>
-                            <p class="card-text">{{ product.description|truncatechars:100 }}</p>
-                            <p class="card-text">Цена: {{ product.price }} руб.</p>
-                            {% if active_version %}
-                                <p class="card-text">Текущая версия: {{ active_version.version_name }} ({{ active_version.version_number }})</p>
-                            {% endif %}
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a class="btn btn-primary" href="{% url 'catalog:home' %}" role="button">К каталогу</a>
-                                    <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить продукт</a>
-                                    <a class="btn btn-warning" href="{% url 'catalog:product_edit' product.pk %}" role="button">Редактировать</a>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container">
+                <div class="row row row row-cols-2 row-cols-sm-2 row-cols-md-2 g-3">
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src="{{ product.picture | media_filter }}">
+                            <div class="card-body">
+                                <p class="card-text">{{ product.name }} - Категория товара: {{ product.category }}</p>
+                                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                                <p class="card-text">Цена: {{ product.price }} руб.</p>
+                                {% if active_version %}
+                                    <p class="card-text">Текущая версия: {{ active_version.version_name }}
+                                        ({{ active_version.version_number }})</p>
+                                {% endif %}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary" href="{% url 'catalog:home' %}" role="button">К
+                                            каталогу</a>
+                                        {% if perms.catalog.can_is_published_product and perms.catalog.can_description_product and perms.catalog.can_category_product or user == product.owner %}
+                                            <a class="btn btn-danger"
+                                               href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить продукт</a>
+                                            <a class="btn btn-warning"
+                                               href="{% url 'catalog:product_edit' product.pk %}" role="button">Редактировать</a>
+                                            </div>
+                                        {% endif %}
+                                    <small class="text-body-secondary">9 мин</small>
                                 </div>
-                                <small class="text-body-secondary">9 мин</small>
                             </div>
                         </div>
                     </div>
@@ -31,4 +38,5 @@
             </div>
         </div>
     </div>
-    {% endblock %}
+
+{% endblock %}
