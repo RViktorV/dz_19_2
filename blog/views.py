@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
 
-from blog.forms import BlogForm
+from blog.forms import BlogForm, BlogContentManagerForm
 from blog.models import Blog
 
 
@@ -33,6 +33,10 @@ class BlogCreateView(CreateView):
     form_class = BlogForm  # 22.1 - Формы в Django вместо fields
     success_url = reverse_lazy('blog:blog_list')
 
+    class BlogListView(ListView):
+        model = Blog  # Подставьте вашу модель
+        template_name = 'blog/blog_list.html'  # Подставьте ваш шаблон
+
     def form_valid(self, form):
         if form.is_valid():
             new_slug = form.save()
@@ -58,8 +62,20 @@ class BlogUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('blog:blog_detail', args=[self.kwargs.get('pk')])
 
+    def get_form_class(self):
+        user = self.request.user
+        if user.has_perms([
+            "blog.can_title",
+            "blog.can_content",
+            "blog.can_preview_image",
+            "blog.can_is_published",
+        ]):
+            return BlogContentManagerForm
+        else:
+            return BlogForm
+        # raise PermissionDenied
+
 
 class BlogDeleteView(DeleteView):
     model = Blog
     success_url = reverse_lazy('blog:blog_list')
-
