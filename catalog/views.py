@@ -67,7 +67,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             # Если пользователь не в группе Moderators, не включаем форму для версий
             if not moderators_group in self.request.user.groups.all():
                 context_data['formset'] = VersionFormset(instance=self.object)
-        # context_data['additional_info'] = 'This is extra data'
         return context_data
 
     def form_valid(self, form):
