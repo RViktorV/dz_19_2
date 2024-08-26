@@ -24,6 +24,9 @@
                         <a class="nav-link" href="{% url 'catalog:product_create' %}">Создать продукт</a>
                     {% endif %}
                 </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'catalog:category_list' %}">Посмотреть категории</a>
+                </li>
 
                 {% if user.is_authenticated %}
                     <!-- Кнопка "Редактировать профиль" для аутентифицированных пользователей -->
