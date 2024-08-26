@@ -3,6 +3,9 @@ from catalog.models import Category
 from django.core.cache import cache
 
 def get_category_from_cach():
+    '''
+    Получение категорий из кэша, если кэш включен, если не включен - из базы данных
+    '''
     if not CACHE_ENABLED:
         return Category.objects.all()
     key = 'catalog_list'

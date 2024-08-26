@@ -18,7 +18,7 @@ django-phonenumber-field = "^8.0.0"
 django-countries = "^7.6.1"
 phonenumbers = "^8.13.43"
 redis = "^5.0.8"
-python-decouple = "^3.8"
+python-dotenv = "^1.0.1"
 
 
 [tool.poetry.dev-dependencies]
