@@ -1,0 +1,59 @@
+{% extends 'catalog/home.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Список категорий</h1>
+    
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'catalog:category_detail' category.pk %}">{{ category.name }}</a></li>
+        {% empty %}
+            <li>Категории не найдены.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block extra_styles %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+    }
+    .container {
+        background-color: #ffffff;
+        padding: 20px 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 600px;
+        margin: 40px auto;
+    }
+    h1 {
+        color: #333333;
+        margin-bottom: 20px;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        background-color: #e7e7e7;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+        color: #333333;
+    }
+    li:hover {
+        background-color: #d4d4d4;
+    }
+    a {
+        color: #333333;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}

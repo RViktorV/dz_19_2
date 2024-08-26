@@ -6,21 +6,18 @@
         {% if perms.blog.can_title and perms.blog.can_content and perms.blog.can_preview_image and perms.blog.can_is_published %}
             <div class="d-flex justify-content-center mb-3">
                 <a href="{% url 'blog:blog_create' %}" class="btn btn-success mr-2">Создать новый пост</a>
-                <a href="{% url 'blog:blog_list_all' %}" class="btn btn-secondary">Показать так же не опубликованные посты</a>
+                <a href="{% url 'blog:blog_list_all' %}" class="btn btn-secondary">Показать так же не опубликованные
+                    посты</a>
             </div>
         {% endif %}
         <ul class="list-group w-50">
             {% for blog in object_list %}
-                {% if perms.blog.can_title and perms.blog.can_content and perms.blog.can_preview_image and perms.blog.can_is_published %}
-                    <li class="list-group-item">
+                <li class="list-group-item">
                     <a href="{% url 'blog:blog_detail' blog.pk %}" class="font-weight-bold">{{ blog.title }}</a>
-                {% else %}
-                    <span class="font-weight-bold">{{ blog.title }}</span>
-                {% endif %}
-            <div class="border p-3 mt-2">
-                {{ blog.content }}
-            </div>
-            </li>
+                    <div class="border p-3 mt-2">
+                        {{ blog.content }}
+                    </div>
+                </li>
             {% endfor %}
         </ul>
     </div>
